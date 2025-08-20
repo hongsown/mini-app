@@ -1,0 +1,50 @@
+{
+  "name": "123-fakturera-mini-app",
+  "version": "1.0.0",
+  "description": "Modern web application with Terms page and editable Pricelist built with React, Vite, Fastify, and PostgreSQL",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "build:backend": "cd backend && npm install --production",
+    "start": "cd backend && npm start",
+    "migrate": "cd backend && npm run migrate",
+    "docker:dev": "docker-compose up -d",
+    "docker:prod": "docker-compose -f docker-compose.prod.yml up -d",
+    "docker:down": "docker-compose down",
+    "test:frontend": "cd frontend && npm run lint",
+    "clean": "rm -rf frontend/node_modules backend/node_modules frontend/dist",
+    "setup": "npm run install:all && npm run migrate"
+  },
+  "keywords": [
+    "react",
+    "vite",
+    "fastify",
+    "postgresql",
+    "terms-of-service",
+    "pricelist",
+    "responsive-design",
+    "mini-app"
+  ],
+  "author": "Claude Code",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/123-fakturera-mini-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/123-fakturera-mini-app/issues"
+  },
+  "homepage": "https://github.com/yourusername/123-fakturera-mini-app#readme",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  }
+}
