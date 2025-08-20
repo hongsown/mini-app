@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import EditableCell from '../components/EditableCell';
 import ApiService from '../services/api';
+import '../assets/css/Pricelist.css';
 
 const Pricelist = () => {
   const [products, setProducts] = useState([]);
@@ -14,6 +15,14 @@ const Pricelist = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [actionMenuOpen, setActionMenuOpen] = useState(null);
   const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
+
+  // Helper function to format price - remove .00 if integer
+  const formatPrice = (price) => {
+    if (!price && price !== 0) return '';
+    const num = parseFloat(price);
+    if (isNaN(num)) return price;
+    return num % 1 === 0 ? num.toString() : num.toFixed(2);
+  };
 
 
   useEffect(() => {
@@ -384,11 +393,11 @@ const Pricelist = () => {
                   <tr>
                     <th className="col-article desktop-only">Article No</th>
                     <th className="col-product">Product/Service</th>
-                    <th className="col-in-price desktop-only">In Price</th>
+                    <th className="col-in-price desktop-only mobile-hidden">In Price</th>
                     <th className="col-price">Price</th>
                     <th className="col-unit desktop-only">Unit</th>
                     <th className="col-stock desktop-only">In Stock</th>
-                    <th className="col-description desktop-only">Description</th>
+                    <th className="col-description desktop-only description-hidden">Description</th>
                     <th className="col-action"></th>
                   </tr>
                 </thead>
@@ -409,20 +418,20 @@ const Pricelist = () => {
                           placeholder="Enter product name"
                         />
                       </td>
-                      <td className="col-in-price desktop-only">
+                      <td className="col-in-price desktop-only mobile-hidden">
                         <EditableCell
-                          value={product.inPrice}
+                          value={formatPrice(product.inPrice)}
                           onSave={(value) => updateProduct(product.id, 'inPrice', value)}
                           type="number"
-                          placeholder="0.00"
+                          placeholder="0"
                         />
                       </td>
                       <td className="col-price">
                         <EditableCell
-                          value={product.price}
+                          value={formatPrice(product.price)}
                           onSave={(value) => updateProduct(product.id, 'price', value)}
                           type="number"
-                          placeholder="0.00"
+                          placeholder="0"
                         />
                       </td>
                       <td className="col-unit desktop-only">
@@ -439,7 +448,7 @@ const Pricelist = () => {
                           placeholder="-"
                         />
                       </td>
-                      <td className="col-description desktop-only">
+                      <td className="col-description desktop-only description-hidden">
                         <EditableCell
                           value={product.description}
                           onSave={(value) => updateProduct(product.id, 'description', value)}
