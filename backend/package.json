@@ -7,7 +7,9 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
-    "migrate": "node src/migrations/run-migrations.js"
+    "migrate": "node src/migrations/run-migrations.js",
+    "build": "echo 'No build step required for backend'",
+    "postinstall": "echo 'Backend dependencies installed successfully'"
   },
   "dependencies": {
     "fastify": "^4.24.3",

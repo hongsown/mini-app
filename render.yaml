@@ -1,0 +1,30 @@
+databases:
+  - name: miniapp-db
+    databaseName: miniapp
+    user: miniapp_user
+
+services:
+  # Backend API Service
+  - type: web
+    name: miniapp-backend
+    env: node
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm run migrate && npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: miniapp-db
+          property: connectionString
+
+  # Frontend Static Site
+  - type: web
+    name: miniapp-frontend
+    env: static
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: ./frontend/dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://miniapp-backend.onrender.com/api
