@@ -111,3 +111,13 @@ railway.toml
 # Keep important files
 !package-lock.json
 !.gitkeep
+
+# Production files
+docker-compose.prod.yml
+.env.production
+
+# Nginx
+nginx.conf
+
+# Render
+render.yaml
