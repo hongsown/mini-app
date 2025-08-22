@@ -8,7 +8,7 @@
 /* Sidebar Styles */
 .sidebar {
   width: 250px;
-  background: #2c3e50;
+  background: white;
   color: white;
   position: fixed;
   left: 0;
@@ -17,6 +17,7 @@
   z-index: 1000;
   overflow-y: auto;
   transition: transform 0.3s ease;
+  box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar-header {
@@ -41,6 +42,18 @@
 
 .sidebar-nav {
   padding: 1rem 0;
+  margin-top: 80px;
+}
+
+.sidebar-menu-title {
+  color: black;
+  text-align: center;
+  font-weight: 500;
+  border-bottom: 2px solid #2980b9;
+  width: 80%;
+  padding: 0.5rem;
+  margin: auto;
+  margin-bottom: 10px;
 }
 
 .sidebar-item {
@@ -48,24 +61,32 @@
   align-items: center;
   gap: 0.75rem;
   padding: 0.875rem 1.5rem;
-  color: #bdc3c7;
+  color: black;
   text-decoration: none;
   transition: all 0.3s ease;
   border-left: 3px solid transparent;
 }
 
 .sidebar-item:hover {
-  background-color: #34495e;
-  color: white;
-  border-left-color: #3498db;
+  opacity: 0.6;
 }
 
 .sidebar-item.active {
-  background-color: #34495e;
-  color: white;
-  border-left-color: #3498db;
+
+  position: relative;
 }
 
+.sidebar-item.active::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 55%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  background-color: #3498db;
+  border-radius: 50%; 
+}
 .sidebar-item.disabled {
   opacity: 0.5;
   cursor: not-allowed;
@@ -99,17 +120,22 @@
 
 /* Top Bar */
 .top-bar {
-  background: #3498db;
+  background: #0471ba;
   color: white;
-  padding: 1rem 2rem;
+  padding: 1rem 4rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  position: sticky;
+  position: fixed;
+  width: 100%;
+  right:0;
   top: 0;
-  z-index: 100;
+  margin-left: -250px;
+  z-index: 999999;
 }
+
+
 
 .top-bar-left {
   display: flex;
@@ -228,6 +254,7 @@
   padding: 2rem;
   background: #f5f5f5;
   overflow: auto;
+  margin-top: 80px;
 }
 
 .content-header {
@@ -249,12 +276,14 @@
 }
 
 .search-input {
-  padding: 0.75rem;
+  padding: 0.5rem 0.75rem;
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 0.9rem;
   background: white;
-  min-width: 200px;
+  color: gray;
+  min-width: 300px;
+  border-radius: 30px;
 }
 
 .search-input:focus {
@@ -263,13 +292,32 @@
   box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
 }
 
+.search-input-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.search-input {
+  padding-right: 40px; /* Để chỗ cho icon */
+}
+
+.search-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: #999;
+  pointer-events: none; 
+}
+
 /* Table Container */
 .table-container {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+  background: #f5f5f5;
+ 
   overflow: hidden;
-  border: 1px solid #f1f3f4;
+
 }
 
 .table-wrapper {
@@ -282,7 +330,6 @@
 }
 
 .table-wrapper {
-  background: white;
   border-radius: var(--border-radius);
   overflow: hidden;
   box-shadow: var(--shadow);
@@ -292,7 +339,7 @@
 .products-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.9rem;
+  font-size: 12px;
   table-layout: auto;
   min-width: 800px;
 }
@@ -309,7 +356,6 @@
   z-index: 10;
   border-right: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-transform: uppercase;
   font-size: 0.8rem;
   letter-spacing: 0.5px;
 }
@@ -323,7 +369,6 @@
   border-bottom: 1px solid #f1f3f4;
   vertical-align: middle;
   transition: all 0.2s ease;
-  background: white;
 }
 
 .product-row:hover {
@@ -514,13 +559,13 @@
 .editable-cell {
   position: relative;
   cursor: pointer;
-  padding: 0.5rem;
+  padding: 2px 0.5rem;
   border-radius: 30px;
   transition: all 0.2s ease;
-  min-height: 40px;
+  min-height: 20px;
   display: flex;
   align-items: center;
-  border: 1px solid #ccc;
+  border: 1px solid #0471ba;
   overflow: hidden;
 
   
@@ -564,6 +609,9 @@
   transition: all 0.2s ease;
   color: #6c757d;
   transform: scale(0.8);
+  position: absolute; 
+  top: 0;
+  right: 0;
 }
 
 .editable-cell:hover .edit-icon {
@@ -585,6 +633,9 @@
   display: flex;
   gap: 0.25rem;
   margin-left: 0.5rem;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .save-btn, .cancel-btn {
@@ -674,6 +725,8 @@
   
   .top-bar {
     padding: 1rem 1.5rem;
+    margin: 0px;
+    z-index: 10;
   }
   
   .top-bar-center {
@@ -1110,12 +1163,12 @@
   align-items: flex-start;
   gap: 20px;
   margin-bottom: 16px;
+  margin-left: 50px;
 }
 
 .search-filters {
   display: flex;
   gap: 1rem;
-  flex: 1;
 }
 
 /* Action Buttons Styles */
@@ -1130,18 +1183,19 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 16px;
+  padding: 8px 10px;
   border: none;
   border-radius: 6px;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
-  min-height: 40px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: rgb(197, 190, 190);
 }
 
 .action-btn.primary {
-  background: #3498db;
+
   color: white;
 }
 
@@ -1153,8 +1207,9 @@
 
 .action-btn.secondary {
   background: #f8f9fa;
-  color: #333;
+  color: gray;
   border: 1px solid #dee2e6;
+  border-radius: 30px;
 }
 
 .action-btn.secondary:hover {
@@ -1274,4 +1329,26 @@ html, body, .pricelist-page {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  text-align: center;
 }
+
+.products-table thead {
+  background: transparent;
+}
+
+.products-table th {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-weight: normal;
+  padding: 8px;
+  text-align: left;
+  box-shadow: none;
+  border-bottom: none;
+}
+
+.products-table td {
+  border: none;
+  border-bottom: 1px solid #eee; /* Giữ border dưới rows */
+}
+
