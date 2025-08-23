@@ -258,7 +258,9 @@
 }
 
 .content-header {
+  margin: auto;
   margin-bottom: 2rem;
+  max-width: 1400px;
 }
 
 .content-header h1 {
@@ -371,15 +373,19 @@
   transition: all 0.2s ease;
 }
 
+
+
 .product-row:hover {
-  background-color: #f8f9fa;
   transform: translateY(-1px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+
 .product-row:hover td {
   border-bottom-color: #e9ecef;
 }
+
+
 
 .product-row.updating {
   background-color: #fff3cd;
@@ -395,11 +401,17 @@
 .col-article {
   width: 8%;
 }
+.col-article i {
+  color:#0471ba;
+}
 
 .col-product {
   width: 30%;
 }
 
+.col-product i {
+  color: #27ae60;
+}
 .col-in-price, .col-price {
   width: 12%;
   text-align: right;
@@ -423,6 +435,8 @@
   width: 7%;
   text-align: center;
 }
+
+
 
 /* Responsive Column Visibility */
 .desktop-only {
@@ -950,7 +964,7 @@
   border-radius: 6px;
   font-size: 16px;
   font-weight: bold;
-  color: #6c757d;
+  color: #0471ba;
   transition: all 0.2s ease;
   width: 32px;
   height: 32px;
@@ -1163,7 +1177,6 @@
   align-items: flex-start;
   gap: 20px;
   margin-bottom: 16px;
-  margin-left: 50px;
 }
 
 .search-filters {
@@ -1318,7 +1331,6 @@ html, body, .pricelist-page {
 .col-name { width: 240px; }
 .col-description { width: 260px; }
 
-/* Ellipsis trong ô editable */
 .editable-cell {
   overflow: hidden;
 }
@@ -1349,6 +1361,17 @@ html, body, .pricelist-page {
 
 .products-table td {
   border: none;
-  border-bottom: 1px solid #eee; /* Giữ border dưới rows */
+  border-bottom: 1px solid #eee;
+}
+
+.search-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: #3498db;
+  pointer-events: none;
 }
 

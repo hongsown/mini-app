@@ -27,6 +27,11 @@ export default function(sequelize) {
       type: DataTypes.TEXT,
       allowNull: true
     },
+    in_stock: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 0
+    },
     is_active: {
       type: DataTypes.BOOLEAN,
       defaultValue: true

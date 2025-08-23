@@ -28,6 +28,7 @@ export default async function productsRoutes(fastify, options) {
           price: parseFloat(product.price),
           category: product.category,
           description: product.description,
+          in_stock: product.in_stock || 0,
           is_active: product.is_active,
           created_at: product.created_at,
           updated_at: product.updated_at
@@ -63,6 +64,7 @@ export default async function productsRoutes(fastify, options) {
           price: parseFloat(product.price),
           category: product.category,
           description: product.description,
+          in_stock: product.in_stock || 0,
           is_active: product.is_active,
           created_at: product.created_at,
           updated_at: product.updated_at
@@ -91,7 +93,7 @@ export default async function productsRoutes(fastify, options) {
       }
 
       // Validate and sanitize update data
-      const allowedFields = ['name', 'in_price', 'price', 'category', 'description', 'is_active'];
+      const allowedFields = ['name', 'in_price', 'price', 'category', 'description', 'in_stock', 'is_active'];
       const filteredData = {};
       
       for (const field of allowedFields) {
@@ -101,6 +103,11 @@ export default async function productsRoutes(fastify, options) {
             filteredData[field] = updateData[field] !== null && updateData[field] !== '' 
               ? parseFloat(updateData[field]) 
               : (field === 'price' ? product.price : null);
+          } else if (field === 'in_stock') {
+            // Ensure in_stock is integer
+            filteredData[field] = updateData[field] !== null && updateData[field] !== '' 
+              ? parseInt(updateData[field]) 
+              : 0;
           } else {
             filteredData[field] = updateData[field];
           }
@@ -119,6 +126,7 @@ export default async function productsRoutes(fastify, options) {
           price: parseFloat(product.price),
           category: product.category,
           description: product.description,
+          in_stock: product.in_stock || 0,
           is_active: product.is_active,
           updated_at: product.updated_at
         }

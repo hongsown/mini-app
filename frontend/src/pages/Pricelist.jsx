@@ -59,7 +59,7 @@ const Pricelist = () => {
         inPrice: product.in_price,
         price: product.price,
         unit: 'service', // Default value since not in DB
-        inStock: '-', // Default value since not in DB
+        inStock: product.in_stock || 0,
         description: product.description || '',
         category: product.category
       }));
@@ -120,7 +120,8 @@ const Pricelist = () => {
         'inPrice': 'in_price',
         'price': 'price',
         'description': 'description',
-        'category': 'category'
+        'category': 'category',
+        'inStock': 'in_stock'
       };
 
       // Skip update for fields not in database
@@ -402,8 +403,9 @@ const Pricelist = () => {
                 <table className="products-table">
                   <thead>
                     <tr>
-                      <th className="col-article desktop-only">Article No. </th>
-                      <th className="col-product">Product/Service</th>
+                      <th className="col-article desktop-only">Article No.
+                        <i class="fa-solid fa-arrow-down"></i> </th>
+                      <th className="col-product">Product/Service <i class="fa-solid fa-arrow-down"></i></th>
                       <th className="col-in-price desktop-only mobile-hidden">In Price</th>
                       <th className="col-price">Price</th>
                       <th className="col-unit desktop-only">Unit</th>
